@@ -1,0 +1,29 @@
+
+.hero {
+  background-color: #121212;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px;
+}
+
+.left {
+  max-width: 50%;
+}
+
+.left h1 {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.left h2 {
+  font-size: 28px;
+  font-weight: 500;
+  color: #cfcfcf;
+}
+
+.right img {
+  width: 350px;
+}

@@ -1,0 +1,15 @@
+/* src/components/Button/Button.module.css */
+
+.button {
+  background-color: var(--black);
+  color: var(--green);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+
+.button:hover {
+  opacity: 0.85;
+}
