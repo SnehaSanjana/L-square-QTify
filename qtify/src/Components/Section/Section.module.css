@@ -1,0 +1,41 @@
+.section {
+  padding: 24px 32px 0;
+  background-color: var(--black);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.actionButton {
+  border: none;
+  background: transparent;
+  color: var(--green);
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.helperText {
+  margin: 0;
+  color: #b3b3b3;
+}
