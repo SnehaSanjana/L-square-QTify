@@ -12,25 +12,20 @@ function Section({
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   const visibleAlbums =
-    showToggle && collapsed ? albums.slice(0, 7) : albums;
+    collapsed ? albums.slice(0, 7) : albums; // ← removed showToggle condition, collapse applies always
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
         <h2 className={styles.title}>{title}</h2>
-        {showToggle ? (
-          <button
-            type="button"
-            className={styles.actionButton}
-            onClick={() => setCollapsed((current) => !current)}
-          >
-            {collapsed ? "Show all" : "Collapse"}
-          </button>
-        ) : (
-          <button type="button" className={styles.actionButton}>
-            Collapse
-          </button>
-        )}
+        {/* ← Every section now always has a Show All / Collapse button */}
+        <button
+          type="button"
+          className={styles.actionButton}
+          onClick={() => setCollapsed((current) => !current)}
+        >
+          {collapsed ? "Show All" : "Collapse"}
+        </button>
       </div>
 
       {loading ? (
