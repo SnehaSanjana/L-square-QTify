@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders navbar feedback button', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const feedbackButton = screen.getByRole('button', { name: /give feedback/i });
+  expect(feedbackButton).toBeInTheDocument();
 });
