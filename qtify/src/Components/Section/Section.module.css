@@ -39,3 +39,7 @@
   margin: 0;
   color: #b3b3b3;
 }
+
+.gridCollapsed {
+  display: none; /* hides visually but cards still exist in DOM */
+}

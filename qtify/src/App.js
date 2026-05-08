@@ -123,13 +123,13 @@ function App() {
     <div>
       <Navbar />
       <Hero />
-      <Section title="Top Albums" albums={topAlbums} loading={loadingTopAlbums} />
+      <Section title="Top Albums" albums={topAlbums} loading={loadingTopAlbums} defaultCollapsed={true} />
       <Section
         title="New Albums"
         albums={newAlbums}
         loading={loadingNewAlbums}
         showToggle
-        defaultCollapsed
+        defaultCollapsed={true}
       />
       {/* ← ADD THIS */}
       <Songs songs={songs} loading={loadingSongs} />
