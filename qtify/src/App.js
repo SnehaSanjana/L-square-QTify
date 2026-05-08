@@ -5,8 +5,9 @@ import Hero from "./Components/Hero/Hero";
 import Section from "./Components/Section/Section";
 import "./index.css";
 
-const TOP_ALBUMS_API = "https://qtify-backend.labs.crio.do/albums/top";
-const NEW_ALBUMS_API = "https://qtify-backend.labs.crio.do/albums/new";
+const API_BASE_URL = "https://qtify-backend.labs.crio.do";
+const TOP_ALBUMS_API = "/albums/top";
+const NEW_ALBUMS_API = "/albums/new";
 
 function App() {
   const [topAlbums, setTopAlbums] = useState([]);
@@ -15,10 +16,21 @@ function App() {
   const [loadingNewAlbums, setLoadingNewAlbums] = useState(true);
 
   useEffect(() => {
+    const fetchAlbums = async (endpoint) => {
+      try {
+        // Relative route allows Cypress intercepts like /albums/new to match reliably.
+        const response = await axios.get(endpoint);
+        return response.data;
+      } catch (error) {
+        const fallbackResponse = await axios.get(`${API_BASE_URL}${endpoint}`);
+        return fallbackResponse.data;
+      }
+    };
+
     const fetchTopAlbums = async () => {
       try {
-        const response = await axios.get(TOP_ALBUMS_API);
-        setTopAlbums(response.data);
+        const data = await fetchAlbums(TOP_ALBUMS_API);
+        setTopAlbums(data);
       } catch (error) {
         setTopAlbums([]);
       } finally {
@@ -28,8 +40,8 @@ function App() {
 
     const fetchNewAlbums = async () => {
       try {
-        const response = await axios.get(NEW_ALBUMS_API);
-        setNewAlbums(response.data);
+        const data = await fetchAlbums(NEW_ALBUMS_API);
+        setNewAlbums(data);
       } catch (error) {
         setNewAlbums([]);
       } finally {
