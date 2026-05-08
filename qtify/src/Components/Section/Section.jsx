@@ -3,16 +3,20 @@ import axios from "axios";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
-const TOP_ALBUMS_API = "https://qtify-backend.labs.crio.do/albums/top";
-
-function Section() {
+function Section({
+  title,
+  apiEndpoint,
+  showToggle = false,
+  defaultCollapsed = false,
+}) {
   const [albums, setAlbums] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [collapsed, setCollapsed] = useState(defaultCollapsed);
 
   useEffect(() => {
-    const fetchTopAlbums = async () => {
+    const fetchAlbums = async () => {
       try {
-        const response = await axios.get(TOP_ALBUMS_API);
+        const response = await axios.get(apiEndpoint);
         setAlbums(response.data);
       } catch (error) {
         setAlbums([]);
@@ -21,23 +25,36 @@ function Section() {
       }
     };
 
-    fetchTopAlbums();
-  }, []);
+    fetchAlbums();
+  }, [apiEndpoint]);
+
+  const visibleAlbums =
+    showToggle && collapsed ? albums.slice(0, 7) : albums;
 
   return (
     <section className={styles.section}>
       <div className={styles.header}>
-        <h2 className={styles.title}>Top Albums</h2>
-        <button type="button" className={styles.actionButton}>
-          Collapse
-        </button>
+        <h2 className={styles.title}>{title}</h2>
+        {showToggle ? (
+          <button
+            type="button"
+            className={styles.actionButton}
+            onClick={() => setCollapsed((current) => !current)}
+          >
+            {collapsed ? "Show all" : "Collapse"}
+          </button>
+        ) : (
+          <button type="button" className={styles.actionButton}>
+            Collapse
+          </button>
+        )}
       </div>
 
       {loading ? (
-        <p className={styles.helperText}>Loading top albums...</p>
+        <p className={styles.helperText}>Loading albums...</p>
       ) : (
         <div className={styles.grid}>
-          {albums.map((album) => (
+          {visibleAlbums.map((album) => (
             <Card
               key={album.id}
               image={album.image}
