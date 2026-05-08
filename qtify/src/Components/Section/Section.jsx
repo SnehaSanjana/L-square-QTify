@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import Card from "../Card/Card";
 import styles from "./Section.module.css";
 
 function Section({
   title,
-  apiEndpoint,
+  albums = [],
+  loading = false,
   showToggle = false,
   defaultCollapsed = false,
 }) {
-  const [albums, setAlbums] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [collapsed, setCollapsed] = useState(defaultCollapsed);
-
-  useEffect(() => {
-    const fetchAlbums = async () => {
-      try {
-        const response = await axios.get(apiEndpoint);
-        setAlbums(response.data);
-      } catch (error) {
-        setAlbums([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAlbums();
-  }, [apiEndpoint]);
 
   const visibleAlbums =
     showToggle && collapsed ? albums.slice(0, 7) : albums;
